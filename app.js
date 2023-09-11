@@ -43,6 +43,24 @@ app.get("/", function (req, res) {
       });
       res.redirect("/");
     } else {
+      res.render("list", { listTitle: day, newListItems: foundItems });
+    }
+  });
+});
+
+app.post("/", function (req, res) {
+
+  const itemName = req.body.newItem;
+
+  const item = new Item({
+    name: itemName
+  });
+
+  item.save();
+
+  res.redirect("/");
+
+});
     }
   });
 });
