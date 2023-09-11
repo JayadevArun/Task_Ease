@@ -30,6 +30,22 @@ const item3 = new Item({
 
 const defaultItems = [item1, item2, item3];
 
+
+app.get("/", function (req, res) {
+  Item.find({}, function (err, foundItems) {
+    if (foundItems.length === 0) {
+      Item.insertMany(defaultItems, function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Successfully saved default items to DB");
+        }
+      });
+      res.redirect("/");
+    } else {
+    }
+  });
+});
 app.listen(3000, function () {
   console.log("Server started on port 3000");
 });
