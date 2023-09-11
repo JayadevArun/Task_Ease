@@ -32,6 +32,16 @@ const defaultItems = [item1, item2, item3];
 
 
 app.get("/", function (req, res) {
+
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    day: "numeric",
+    month: "long"
+  };
+  const today = new Date();
+  const day = today.toLocaleDateString("en-US", options);
+
   Item.find({}, function (err, foundItems) {
     if (foundItems.length === 0) {
       Item.insertMany(defaultItems, function (err) {
